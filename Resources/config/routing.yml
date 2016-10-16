@@ -1,0 +1,3 @@
+mallapp_eventmodel_homepage:
+    path:     /
+    defaults: { _controller: MallappEventmodelBundle:Default:index }
