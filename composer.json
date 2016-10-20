@@ -1,0 +1,32 @@
+{
+    "name" : "mallapp/eventmodelbundle",
+    "description" : "A bundle for modelling recurring events",
+    "type" : "symfony-bundle",
+    "authors" : [{
+        "name" : "Simon Mall",
+        "email" : "simon@mallapp.ch"
+    }],
+    "keywords" : [
+        "recurring event"
+    ],
+    "license" : [
+        "MIT"
+    ],
+    "require" : {
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6",
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Mallapp\\EventmodelBundle" : ""
+        }
+    },
+    "target-dir" : "Mallapp/EventmodelBundle",
+    "repositories" : [{
+    }],
+    "extra" : {
+    "branch-alias" : {
+            "dev-master" : "0.1-dev"
+        }
+    }
+}
