@@ -46,7 +46,16 @@ class TEDifference implements TemporalExpressionInterface {
         
         
     }
+    
+    public function overrideIncludedUnion(TEUnion $included) {
+        $this->included = $included;
+    }
 
+    public function overrideExcludedUnion(TEUnion $excluded) {
+        $this->excluded = $excluded;
+    }
+
+        
     public function addInclusion(TemporalExpressionInterface $included) {
         
         $this->included->addItem($included);
