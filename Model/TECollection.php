@@ -28,7 +28,8 @@ namespace Mallapp\EventmodelBundle\Model;
 
 
 /**
- * Description of TECollection
+ * Parent class for the Union and the Intersection classes.
+ * Keeps an array of expressions and allows to add new expressions.
  *
  * @author Simon Mall
  */

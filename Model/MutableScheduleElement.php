@@ -26,36 +26,37 @@
 
 namespace Mallapp\EventmodelBundle\Model;
 
-
 /**
- * Very simple Temporal Expression which contains just one single day.
+ * Description of MutableScheduleElement
  *
  * @author Simon Mall
  */
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
+class MutableScheduleElement {
+    
+    private $eventId;
+    
+    private $expression;
+    
+    /**
+     * 
+     * @param TemporalExpressionInterface $expression A TemporalExpression
+     * @param int $eventId Reference to an event (the event itself is not managed by the Eventmodel Bundle.
+     */
+    public function __construct(TEDifference $DiffExpression, $eventId) {
+        
+        $this->eventId = $eventId;
+        $this->expression = $DiffExpression;
+        
+    }
 
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
+    function getEventId() {
+        return $this->eventId;
+    }
+    
+    function getExpression() {
+        return $this->expression;
+    }
 
-		$this->singleDate = $date;
 
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
+    
 }

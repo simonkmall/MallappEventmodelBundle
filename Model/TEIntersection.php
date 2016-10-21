@@ -27,7 +27,8 @@
 namespace Mallapp\EventmodelBundle\Model;
 
 /**
- * Description of TEIntersection
+ * Set expression which intersects several sub-expressions. Includes all dates
+ * which are included in all of the sub-expressions.
  *
  * @author Simon Mall
  */

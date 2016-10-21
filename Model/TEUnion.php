@@ -27,7 +27,8 @@
 namespace Mallapp\EventmodelBundle\Model;
 
 /**
- * Description of TEUnion
+ * Set expression which combines several sub-expressions. Includes all dates
+ * which are included in any of the sub-expressions.
  *
  * @author Simon Mall
  */

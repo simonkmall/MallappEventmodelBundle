@@ -24,38 +24,22 @@
  * THE SOFTWARE.
  */
 
-namespace Mallapp\EventmodelBundle\Model;
-
+namespace Mallapp\EventmodelBundle\Tests\Model;
 
 /**
- * Very simple Temporal Expression which contains just one single day.
+ * Description of MutableScheduleElementTest
  *
  * @author Simon Mall
  */
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
+class MutableScheduleElementTest extends \PHPUnit_Framework_TestCase {
+   
+    
+    public function testElement() {
+        
+        // No tests currently necessary
+        
+        $this->assertTrue(true);
+        
+        
+    }
 }

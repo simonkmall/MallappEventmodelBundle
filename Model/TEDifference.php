@@ -27,9 +27,10 @@
 namespace Mallapp\EventmodelBundle\Model;
 
 /**
- * TEDifference keeps a union of included and a union of excluded
- * Expressions. NOTE that exlusion is stronger than inclusion, i.e.
- * if an expression is both included and excluded, it is excluded.
+ * Set expression consisting of a union of included and a union of excluded
+ * sub-expressions. Includes all dates which are included in one of the 
+ * "inclusion" union expect those that are included in one of the "exclusion"
+ * union.
  *
  * @author Simon Mall
  */

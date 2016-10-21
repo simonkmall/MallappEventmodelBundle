@@ -26,36 +26,30 @@
 
 namespace Mallapp\EventmodelBundle\Model;
 
-
 /**
- * Very simple Temporal Expression which contains just one single day.
+ * Simple class containing just a date and an eventId.
  *
  * @author Simon Mall
  */
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
+class EventDate {
 
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
+    private $eventId;
+    
+    private $date;
+    
+    public function __construct($eventId, $date) {
+        $this->eventId = $eventId;
+        $this->date = $date;
+    }
+    
+    public function getEventId() {
+        return $this->eventId;
+    }
 
-		$this->singleDate = $date;
+    public function getDate() {
+        return $this->date;
+    }
 
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
 
-	}
-	
-	
+    
 }

@@ -29,6 +29,12 @@ namespace Mallapp\EventmodelBundle\Model;
 use DateTime;
 use DateInterval;
 
+/**
+ * Temporal Expression which includes a sequence of every n-th specific 
+ * weekdays. E.g. "Every second Monday".
+ * 
+ * @author Simon Mall
+ */
 class EveryNthWeek implements TemporalExpressionInterface
 {
 	

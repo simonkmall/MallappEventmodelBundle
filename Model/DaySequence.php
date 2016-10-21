@@ -27,7 +27,11 @@
 namespace Mallapp\EventmodelBundle\Model;
 
 
-
+/**
+ * Temporal Expression which contains a sequence of consecutive days.
+ * 
+ * @author Simon Mall 
+ */
 class DaySequence implements TemporalExpressionInterface
 {
 	
