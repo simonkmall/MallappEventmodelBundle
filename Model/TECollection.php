@@ -27,31 +27,20 @@
 namespace Mallapp\EventmodelBundle\Model;
 
 
+/**
+ * Description of TECollection
+ *
+ * @author Simon Mall
+ */
+abstract class TECollection {
+    
+    protected $elements = array();
+    
+    public function addItem(TemporalExpressionInterface $element) {
+        
+        $this->elements[] = $element;
+        
+    }
 
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
+    
 }

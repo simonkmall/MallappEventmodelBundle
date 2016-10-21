@@ -27,31 +27,24 @@
 namespace Mallapp\EventmodelBundle\Model;
 
 
-
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
+/**
+ * Small helper class that creates a DateTime object with a specific date
+ * But with Time 00:00:00 and timezone +0000.
+ *
+ * @author Simon Mall
+ */
+class SimpleDate {
+    
+    /**
+     * Creates a date from a string.
+     * 
+     * @param $dateString Format must be YYYY-MM-DD.
+     * @return \DateTime
+     */
+    public static function create($dateString) {
+        
+        return \DateTime::createFromFormat(\DateTime::ISO8601, $dateString.'T00:00:00+0000');
 		
-		return $this->singleDate == $date;
-
-	}
-	
-	
+        
+    }
 }

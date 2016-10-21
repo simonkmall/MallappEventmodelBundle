@@ -24,32 +24,32 @@ class DaySequenceTest extends \PHPUnit_Framework_TestCase
 		$seqMinusFive = new DaySequence(\DateTime::createFromFormat(\DateTime::ISO8601, '2016-02-15T00:00:00+0000'), 
 				\DateTime::createFromFormat(\DateTime::ISO8601, '2016-02-10T00:00:00+0000'));
 		
-		$this->assertFalse($seqMinusFive->includesDate($beforeDate));
-		$this->assertFalse($seqMinusFive->includesDate($atDate));
-		$this->assertFalse($seqMinusFive->includesDate($afterDate));
-		$this->assertFalse($seqMinusFive->includesDate($atTenDaysAfterDate));
-		$this->assertFalse($seqMinusFive->includesDate($atElevenDaysAfterDate));
+		$this->assertFalse($seqMinusFive->includes($beforeDate));
+		$this->assertFalse($seqMinusFive->includes($atDate));
+		$this->assertFalse($seqMinusFive->includes($afterDate));
+		$this->assertFalse($seqMinusFive->includes($atTenDaysAfterDate));
+		$this->assertFalse($seqMinusFive->includes($atElevenDaysAfterDate));
 		
 		
 		// Try with a single date
 		$seqOne = new DaySequence(\DateTime::createFromFormat(\DateTime::ISO8601, '2016-02-15T00:00:00+0000'));
 		
-		$this->assertFalse($seqOne->includesDate($beforeDate));
-		$this->assertTrue($seqOne->includesDate($atDate));
-		$this->assertFalse($seqOne->includesDate($afterDate));
-		$this->assertFalse($seqOne->includesDate($atTenDaysAfterDate));
-		$this->assertFalse($seqOne->includesDate($atElevenDaysAfterDate));
+		$this->assertFalse($seqOne->includes($beforeDate));
+		$this->assertTrue($seqOne->includes($atDate));
+		$this->assertFalse($seqOne->includes($afterDate));
+		$this->assertFalse($seqOne->includes($atTenDaysAfterDate));
+		$this->assertFalse($seqOne->includes($atElevenDaysAfterDate));
 		
 		
 		// Try valid sequence of ten days
 		$seqTen = new DaySequence(\DateTime::createFromFormat(\DateTime::ISO8601, '2016-02-15T00:00:00+0000'),
 				\DateTime::createFromFormat(\DateTime::ISO8601, '2016-02-24T00:00:00+0000'));
 		
-		$this->assertFalse($seqTen->includesDate($beforeDate));
-		$this->assertTrue($seqTen->includesDate($atDate));
-		$this->assertTrue($seqTen->includesDate($afterDate));
-		$this->assertTrue($seqTen->includesDate($atTenDaysAfterDate));
-		$this->assertFalse($seqTen->includesDate($atElevenDaysAfterDate));
+		$this->assertFalse($seqTen->includes($beforeDate));
+		$this->assertTrue($seqTen->includes($atDate));
+		$this->assertTrue($seqTen->includes($afterDate));
+		$this->assertTrue($seqTen->includes($atTenDaysAfterDate));
+		$this->assertFalse($seqTen->includes($atElevenDaysAfterDate));
 		
 	}
 	

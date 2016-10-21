@@ -9,7 +9,7 @@ use \DateInterval;
 interface TemporalExpressionInterface
 {
 	
-	public function includesDate(DateTime $date);
+	public function includes(DateTime $date);
 	
 	
 }

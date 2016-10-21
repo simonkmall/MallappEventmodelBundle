@@ -26,32 +26,27 @@
 
 namespace Mallapp\EventmodelBundle\Model;
 
+/**
+ * Description of TEIntersection
+ *
+ * @author Simon Mall
+ */
+class TEIntersection extends TECollection implements TemporalExpressionInterface {
+    
+    
+    public function includes(\DateTime $date) {
+    
+        foreach ($this->elements as $element) {
+            
+            if (!$element->includes($date)) {
+                
+                return false;
+                
+            }
+        }
+        
+        return true;
+        
+    }
 
-
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
 }

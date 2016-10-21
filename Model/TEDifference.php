@@ -26,32 +26,42 @@
 
 namespace Mallapp\EventmodelBundle\Model;
 
+/**
+ * TEDifference keeps a union of included and a union of excluded
+ * Expressions. NOTE that exlusion is stronger than inclusion, i.e.
+ * if an expression is both included and excluded, it is excluded.
+ *
+ * @author Simon Mall
+ */
+class TEDifference implements TemporalExpressionInterface {
+    
+    private $included;
+    private $excluded;
+    
+    public function __construct() {
+        
+        $this->included = new TEUnion();
+        $this->excluded = new TEUnion();
+        
+        
+    }
 
+    public function addInclusion(TemporalExpressionInterface $included) {
+        
+        $this->included->addItem($included);
+        
+    }
+    
+    public function addExclusion(TemporalExpressionInterface $excluded) {
+        
+        $this->excluded->addItem($excluded);
+        
+    }
+    
+    public function includes(\DateTime $date) {
+        
+        return $this->included->includes($date) && !$this->excluded->includes($date);
+        
+    }
 
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
 }

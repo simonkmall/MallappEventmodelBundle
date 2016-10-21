@@ -24,34 +24,40 @@
  * THE SOFTWARE.
  */
 
-namespace Mallapp\EventmodelBundle\Model;
+namespace Mallapp\EventmodelBundle\Tests\Model;
+
+use Mallapp\EventmodelBundle\Model\TEUnion;
+use Mallapp\EventmodelBundle\Model\SingleDay;
+use Mallapp\EventmodelBundle\Model\SimpleDate;
 
 
 
-class SingleDay implements TemporalExpressionInterface
-{
+/**
+ * Description of TEUnionTest
+ *
+ * @author Simon Mall
+ */
+class TEUnionTest extends \PHPUnit_Framework_TestCase {
+    
+    public function testIncludes() {
+        
+        // Prepare the union class
+        
+        $union = new TEUnion();
+        
+        $union->addItem(new SingleDay(SimpleDate::create("2016-10-21")));
+        $union->addItem(new SingleDay(SimpleDate::create("2016-10-23")));
+        
+        // Test the includes function
+        
+        $this->assertTrue($union->includes(SimpleDate::create("2016-10-21")));
+        $this->assertTrue($union->includes(SimpleDate::create("2016-10-23")));
+        
+        $this->assertFalse($union->includes(SimpleDate::create("2016-10-20")));
+        $this->assertFalse($union->includes(SimpleDate::create("2016-10-22")));
+        $this->assertFalse($union->includes(SimpleDate::create("2016-10-24")));
+        
 	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
+    }
+    
 }

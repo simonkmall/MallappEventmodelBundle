@@ -26,32 +26,26 @@
 
 namespace Mallapp\EventmodelBundle\Model;
 
-
-
-class SingleDay implements TemporalExpressionInterface
-{
-	
-	protected $singleDate;
-
-	
-	/**
-         * Creates a Temporal Expression object for a single date.
-         * @param \DateTime $date
-         */
-	public function __construct(\DateTime $date)
-	{
-
-		$this->singleDate = $date;
-
-	}
-	
-	
-	public function includes(\DateTime $date) 
-	{
-		
-		return $this->singleDate == $date;
-
-	}
-	
-	
+/**
+ * Description of TEUnion
+ *
+ * @author Simon Mall
+ */
+class TEUnion extends TECollection implements TemporalExpressionInterface {
+    
+    public function includes(\DateTime $date) {
+        
+        foreach ($this->elements as $element) {
+            
+            if ($element->includes($date)) {
+                
+                return true;
+                
+            }
+        }
+        
+        return false;
+        
+    }
+    
 }
