@@ -31,7 +31,7 @@ namespace Mallapp\EventmodelBundle\Model;
  *
  * @author Simon Mall
  */
-class MutableScheduleElement {
+class MutableScheduleElement implements \JsonSerializable {
     
     private $eventId;
     
@@ -57,6 +57,13 @@ class MutableScheduleElement {
         return $this->expression;
     }
 
+    public function jsonSerialize() {
+        
+        return [
+          'eventId' => $this->eventId,
+          'expression' => $this->expression  
+        ];
+        
+    }
 
-    
 }

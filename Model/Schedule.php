@@ -38,20 +38,12 @@ use \DatePeriod;
  *
  * @author Simon Mall
  */
-class Schedule
+class Schedule implements \JsonSerializable
 {
 
     protected $elements = array();
     
-    static public function createFromJson($JsonString) {
-        
-        
-    }
-    
-    public function jsonString() {
-        
-        
-    }
+
     
     public function datesForEventId($eventId, DateTime $fromDate, DateTime $toDate) {
 
@@ -194,8 +186,13 @@ class Schedule
             
         }
     }
-    
 
+    public function jsonSerialize() {
+        
+        
+        return $this->elements;
+        
+    }
 
 }
 

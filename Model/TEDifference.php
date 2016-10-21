@@ -65,4 +65,15 @@ class TEDifference implements TemporalExpressionInterface {
         
     }
 
+    public function jsonSerialize() {
+        
+        return [
+            'difference' => [
+                'included' => $this->included,
+                'excluded' => $this->excluded
+            ]
+        ];
+        
+    }
+
 }

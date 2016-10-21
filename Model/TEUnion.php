@@ -48,5 +48,14 @@ class TEUnion extends TECollection implements TemporalExpressionInterface {
         return false;
         
     }
-    
+
+    public function jsonSerialize() {
+        
+        return [
+            'union' => $this->elements
+        ];
+                
+        
+    }
+
 }

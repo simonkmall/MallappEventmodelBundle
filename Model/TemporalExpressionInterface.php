@@ -34,7 +34,7 @@ use \DateTime;
  * 
  * @author Simon Mall
  */
-interface TemporalExpressionInterface
+interface TemporalExpressionInterface extends \JsonSerializable
 {
 	
         /**

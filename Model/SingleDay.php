@@ -56,6 +56,13 @@ class SingleDay implements TemporalExpressionInterface
 		return $this->singleDate == $date;
 
 	}
-	
-	
+
+    public function jsonSerialize() {
+        
+        return [
+          'singleDay' => $this->singleDate->format(\DateTime::ISO8601)  
+        ];
+        
+    }
+
 }

@@ -50,4 +50,12 @@ class TEIntersection extends TECollection implements TemporalExpressionInterface
         
     }
 
+    public function jsonSerialize() {
+        
+        return [
+            'intersection' => $this->elements
+        ];
+        
+    }
+
 }

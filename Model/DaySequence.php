@@ -83,7 +83,22 @@ class DaySequence implements TemporalExpressionInterface
 		return $date <= $this->endDate;
 		
 	}
-	
 
-	
+    public function jsonSerialize() {
+        
+        $endDateString = null;
+        
+        if ($this->endDate != null) {
+            $endDateString = $this->endDate->format(\DateTime::ISO8601);
+        }
+        
+        return [
+          'daySequence' => [
+              'startDate' => $this->startDate->format(\DateTime::ISO8601),
+              'endDate' => $endDateString
+          ]
+        ];
+        
+    }
+
 }

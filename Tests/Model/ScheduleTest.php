@@ -29,6 +29,8 @@ namespace Mallapp\EventmodelBundle\Tests\Model;
 use Mallapp\EventmodelBundle\Model\Schedule;
 use Mallapp\EventmodelBundle\Model\DaySequence;
 use Mallapp\EventmodelBundle\Model\SingleDay;
+use Mallapp\EventmodelBundle\Model\EveryNthWeek;
+use Mallapp\EventmodelBundle\Model\TEIntersection;
 use Mallapp\EventmodelBundle\Model\SimpleDate;
 
 
@@ -109,6 +111,82 @@ class ScheduleTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($allEvents[1]->getEventId(), $eventId);
         $this->assertEquals($allEvents[1]->getDate()->format("Y-m-d H:i:s"), "2016-10-05 00:00:00");
         
+    }
+    
+    public function testJsonSerialization() {
+        
+        // Create a more complex (nested) schedule
+        
+        $schedule = new Schedule();
+        
+        $schedule->includeExpressionForEvent(0, new SingleDay(SimpleDate::create("2014-07-01")));
+        $schedule->includeExpressionForEvent(1, new DaySequence(SimpleDate::create("2016-10-01"), SimpleDate::create("2016-10-30")));
+        $schedule->includeExpressionForEvent(2, new EveryNthWeek(SimpleDate::create("2016-12-30"), 3, 2));
+        
+        $schedule->excludeExpressionForEvent(3, new SingleDay(SimpleDate::create("2014-07-01")));
+        $schedule->excludeExpressionForEvent(4, new DaySequence(SimpleDate::create("2016-10-28"), SimpleDate::create("2016-11-04")));
+        $schedule->excludeExpressionForEvent(5, new EveryNthWeek(SimpleDate::create("2016-12-30"), 3, 3));
+        
+        $jsonString = json_encode($schedule);
+        
+        // Assert that a valid jsonSting was created
+        
+        $this->assertFalse($jsonString == FALSE);
+        
+        // Convert back to object and assert content (at least partially)
+        
+        $jsonObject = json_decode($jsonString, true);
+        
+        $this->assertTrue(is_array($jsonObject));
+        
+        $this->assertEquals(count($jsonObject), 6);
+        
+        $this->assertTrue(is_array($jsonObject[0]));
+        
+        $this->assertArrayHasKey("eventId", $jsonObject[0]);
+        
+        $this->assertEquals($jsonObject[0]['eventId'], 0);
+        
+        $this->assertArrayHasKey("expression", $jsonObject[0]);
+        
+        $expression = $jsonObject[0]['expression'];
+        
+        $this->assertTrue(is_array($expression));
+        
+        $this->assertArrayHasKey("difference", $expression);
+        
+        $this->assertTrue(is_array($expression['difference']));
+        
+        $this->assertArrayHasKey("excluded", $expression['difference']);
+        
+        $this->assertArrayHasKey("included", $expression['difference']);
+        
+        $this->assertTrue(is_array($expression['difference']['included']));
+        
+        $this->assertArrayHasKey("union", $expression['difference']['included']);
+        
+        $union = $expression['difference']['included']['union'];
+        
+        $this->assertTrue(is_array($union));
+        
+        $this->assertTrue(is_array($union[0]));
+        
+        $this->assertArrayHasKey("singleDay", $union[0]);
+        
+        $this->assertEquals($union[0]['singleDay'], "2014-07-01T00:00:00+0000");
+        
+        $endDateString = $jsonObject[1]['expression']['difference']['included']['union'][0]['daySequence']['endDate'];
+        
+        $this->assertEquals($endDateString, "2016-10-30T00:00:00+0000");
+        
+        $startDateString = $jsonObject[2]['expression']['difference']['included']['union'][0]['everyNthWeek']['startDate'];
+        
+        $this->assertEquals($startDateString, "2016-12-30T00:00:00+0000");
+ 
+        $weekInterval = $jsonObject[5]['expression']['difference']['excluded']['union'][0]['everyNthWeek']['weekInterval'];
+        
+        $this->assertEquals($weekInterval, 3);
+
     }
     
 }

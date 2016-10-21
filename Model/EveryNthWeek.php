@@ -150,6 +150,24 @@ class EveryNthWeek implements TemporalExpressionInterface
 		return intval($date->format("N"));
 		
 	}
-	
-	
+
+    public function jsonSerialize() {
+
+        $endDateString = null;
+        
+        if ($this->endDate != null) {
+            $endDateString = $this->endDate->format(\DateTime::ISO8601);
+        }
+                
+        return [
+          'everyNthWeek' => [
+              'startDate' => $this->startDate->format(\DateTime::ISO8601),
+              'endDate' => $endDateString,
+              'dayOfWeek' => $this->dayOfWeek,
+              'weekInterval' => $this->weekInterval
+              ]
+        ];
+        
+    }
+
 }
